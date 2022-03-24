@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# OPENCLASSROOMS PROJECT 13 (ARGENT BANK APP)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Descr
 
-## Available Scripts
+## Dependencies
 
-In the project directory, you can run:
+- [React](https://reactjs.org/) v17.0.1
 
-### `npm start`
+- [react-router-dom](https://reactrouter.com/web/guides/quick-start) v5.2.0
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [prop-types](https://www.npmjs.com/package/prop-types) v15.7.2
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [Axios](https://github.com/axios/axios) v0.21.1
 
-### `npm test`
+- [Sass](https://www.npmjs.com/package/node-sass) v5.0.0
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Redux](https://redux.js.org/) v4.0.5
 
-### `npm run build`
+- [React Redux](https://react-redux.js.org/) v7.2.2
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Recommended text editor: [Visual Studio Code](https://code.visualstudio.com/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation Dependencies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- You need [Node](https://nodejs.org/en/) (v14.15.5) to run the `npm` commands
 
-### `npm run eject`
+## Install and run the project
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Clone the project to your computer
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`git clone https://github.com/maevanapcontact/elmaissoumaboudrare_13_23032022.git`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Go to the project folder
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+`cd elmaissoumaboudrare_13_23032022`
 
-## Learn More
+- Install the packages
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`npm i`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Run the project (port 3000 by default)
 
-### Code Splitting
+`npm start`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- To get the backend, clone this repository and follow the instructions in the README
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Backend Repository](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API)
