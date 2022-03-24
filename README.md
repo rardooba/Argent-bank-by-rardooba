@@ -1,47 +1,68 @@
-# OPENCLASSROOMS PROJECT 13 (ARGENT BANK APP)
+# ARGENT BANK
 
-Descr
+Argent Bank is a React app for managing a user Bank Account. 
 
-## Dependencies
+MISSION > Build a user profile page in React, use a state manager and JWT.
 
-- [React](https://reactjs.org/) v17.0.1
+## Useful links
 
-- [react-router-dom](https://reactrouter.com/web/guides/quick-start) v5.2.0
+- [Repository](https://github.com/rardooba/ElMaissoumAboudrare_13_23032022) 📖
 
-- [prop-types](https://www.npmjs.com/package/prop-types) v15.7.2
+## Let's get started !
 
-- [Axios](https://github.com/axios/axios) v0.21.1
+This project was made with [Create React App](https://github.com/facebook/create-react-app) and [NodeJs](https://nodejs.org/en/) version 16 or more.
 
-- [Sass](https://www.npmjs.com/package/node-sass) v5.0.0
+## Technologies
+- JS
+- CSS
+- ReactJs
 
-- [Redux](https://redux.js.org/) v4.0.5
+## Installation
 
-- [React Redux](https://react-redux.js.org/) v7.2.2
+- Clone the [repository](https://github.com/rardooba/ElMaissoumAboudrare_13_23032022) 📖
+- cd ElMaissoumAboudrare_13_23032022
+- install the node modules
+
+### `npm install or yarn install`
+
+You will need some dependencies for running this project :
+
+- [React](https://fr.reactjs.org/) (17.0.2)
+- [react-router-dom](https://reactrouter.com/web/guides/quick-start) (6.2.2)
+- [Styled-components](https://styled-components.com/) (5.3.3)
+- [Axios](https://github.com/axios/axios) (0.26.1)
+- [prop-types](https://www.npmjs.com/package/prop-types) (1.1.0)
+- [Redux](https://redux.js.org/) (4.1.2)
+- [React Redux](https://react-redux.js.org/) (7.2.6)
 
 - Recommended text editor: [Visual Studio Code](https://code.visualstudio.com/)
 
-## Installation Dependencies
+## Available Scripts
 
-- You need [Node](https://nodejs.org/en/) (v14.15.5) to run the `npm` commands
+In the project directory, you can run:
 
-## Install and run the project
+### `npm start`
 
-- Clone the project to your computer
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-`git clone https://github.com/maevanapcontact/elmaissoumaboudrare_13_23032022.git`
+### `npm run build`
 
-- Go to the project folder
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+The build is minified and the filenames include the hashes.\
 
-`cd elmaissoumaboudrare_13_23032022`
+Locally preview production build
+npm run preview or yarn preview
 
-- Install the packages
+## Backend API [HERE](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API)
 
-`npm i`
+## Author of code base
 
-- Run the project (port 3000 by default)
+[@rardooba](https://github.com/rardooba) 
 
-`npm start`
+## Licensing
 
-- To get the backend, clone this repository and follow the instructions in the README
+This project is part of the OpenClassrooms [Application developer - JavaScript React](https://openclassrooms.com/fr/paths/516-developpeur-dapplication-javascript-react) course. The code is freely reusable, but the images / logo / mock-up do not belong to me.
 
-[Backend Repository](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API)
+If you are also an OpenClassrooms student, you can freely draw inspiration from my work, but I obviously do not recommend copying parts of it.
