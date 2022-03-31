@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+//Axios
 import axios from "axios";
 
-import { login } from "../../actions/user.actions";
+//Redux
+import { login } from "../../redux/actions/user.actions";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+
+//Router
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
-
   //STATES
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,17 +19,16 @@ const Login = () => {
   const [isError, setIsError] = useState(false);
 
   //HOOKS init
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   /**
    * Get user credentials > email, password, token
-   * @param {Object} e event 
+   * @param {Object} e event
    */
   const handleLogin = (e) => {
     e.preventDefault();
 
-    //post content > OBJ 
+    //post content > OBJ send with post method
     const userLOGinfos = {
       email: email,
       password: password,
@@ -50,7 +52,7 @@ const Login = () => {
   return (
     <>
       {isAuth ? (
-        navigate("/profile")
+        <Navigate to="/profile" />
       ) : (
         <MAIN className="bg-dark">
           <SIGNin>
@@ -93,6 +95,10 @@ const Login = () => {
   );
 };
 
+/*-----------------------*\
+            CSS
+\*-----------------------*/
+
 const MAIN = styled.main`
   flex: 1;
 
@@ -117,7 +123,7 @@ const SIGNin = styled.section`
     color: #cd2f39;
     display: none;
   }
-  
+
   .error {
     display: block;
   }

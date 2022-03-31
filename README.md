@@ -31,9 +31,10 @@ You will need some dependencies for running this project :
 - [react-router-dom](https://reactrouter.com/web/guides/quick-start) (6.2.2)
 - [Styled-components](https://styled-components.com/) (5.3.3)
 - [Axios](https://github.com/axios/axios) (0.26.1)
-- [prop-types](https://www.npmjs.com/package/prop-types) (1.1.0)
+- [prop-types](https://www.npmjs.com/package/prop-types) (15.8.1)
 - [Redux](https://redux.js.org/) (4.1.2)
 - [React Redux](https://react-redux.js.org/) (7.2.6)
+- [Redux Thunk](https://github.com/reduxjs/redux-thunk) (2.4.1)
 
 - Recommended text editor: [Visual Studio Code](https://code.visualstudio.com/)
 

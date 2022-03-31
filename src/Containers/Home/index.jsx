@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+
+//Components
 import Feature from "./Feature";
 
+//Data > Features
 import features from "../../API/features";
 
 const Home = () => {
   return (
     <MAIN>
+      
       <div className="banner">
         <section className="caption">
           <h2 className="sr-only">Promoted Content</h2>
@@ -21,7 +25,6 @@ const Home = () => {
 
       <section className="features">
         <h2 className="sr-only">Features</h2>
-
         {features.map((feature) => (
           <Feature
             key={feature.id}
@@ -32,6 +35,7 @@ const Home = () => {
           />
         ))}
       </section>
+
     </MAIN>
   );
 };

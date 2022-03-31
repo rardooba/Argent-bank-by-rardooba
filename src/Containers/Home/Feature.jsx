@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import propTypes from "prop-types";
+
 /**
  * Feature component
  * @param {Object} params 
@@ -20,7 +22,12 @@ const Feature = ({ src, alt, title, description }) => {
   );
 };
 
-export default Feature;
+Feature.propTypes = {
+  src: propTypes.string,
+  alt: propTypes.string,
+  title: propTypes.string,
+  description: propTypes.string,
+}
 
 /*-----------------------*\
             CSS
@@ -44,3 +51,5 @@ const ITEM = styled.div`
     padding: 1rem;
   }
 `;
+
+export default Feature;

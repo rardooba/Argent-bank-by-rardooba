@@ -1,9 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
+//Router
 import { Link } from "react-router-dom";
 
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/actions/user.actions";
+
 const Nav = () => {
+  //? Get user data from store > logStatus and firstName
+  const userData = useSelector((state) => state.userReducer);
+
+  const dispatch = useDispatch();
+
   return (
     <NAV className="main-nav">
       <Link className="logo" to="/">
@@ -11,21 +21,23 @@ const Nav = () => {
         <SRONLY>Argent Bank</SRONLY>
       </Link>
 
-      <LOGIN>
-        <Link className="item" to="/login">
-          <span className="fa fa-user-circle"></span>
-          Sign In
-        </Link>
-      </LOGIN>
-
-      {/* <LOGOUT>
-        <span className="fas fa-user user"></span>
-        <span className="name">FirstName</span>
-        <Link className="item" to="/">
-          <span className="fas fa-sign-out-alt out"></span>
-          Sign out
-        </Link>
-      </LOGOUT> */}
+      {!userData.logStatus ? (
+        <LOGIN>
+          <Link className="item" to="/login">
+            <i className="fa fa-user-circle"></i>
+            Sign In
+          </Link>
+        </LOGIN>
+      ) : (
+        <LOGOUT>
+          <span className="fa fa-user-circle user"></span>
+          <span className="name">{userData.firstName}</span>
+          <Link className="item" to="/" onClick={() => dispatch(logout())}>
+            <i className="fa fa-sign-out out"></i>
+            Sign Out
+          </Link>
+        </LOGOUT>
+      )}
     </NAV>
   );
 };
@@ -65,7 +77,15 @@ const NAV = styled.nav`
     text-decoration: none;
     margin-right: 0.5rem;
 
-    span {
+    .fa {
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    i {
       margin-right: 4px;
     }
 
@@ -87,27 +107,24 @@ const LOGO = styled.img`
 
 const LOGIN = styled.div``;
 
-// const LOGOUT = styled.div`
-//   display: flex;
-//   align-items: center;
+const LOGOUT = styled.div`
+  display: flex;
+  align-items: center;
 
-//   .name {
-//     font-weight: bold;
-//     color: #2c3e50;
-//     margin-right: 25px;
-//   }
+  .name {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-right: 25px;
+  }
 
-//   .user {
-//     color: #98a3b0;
-//     padding: 12px;
-//     background: #dde2ea;
-//     border-radius: 50%;
-//     margin-right: 10px;
-//   }
+  .user {
+    color: #2c3e50;
+    margin-right: 5px;
+  }
 
-//   .out {
-//     font-size: 1.5rem;
-//   }
-// `;
+  .out {
+    font-size: 1.5rem;
+  }
+`;
 
 export default Nav;
