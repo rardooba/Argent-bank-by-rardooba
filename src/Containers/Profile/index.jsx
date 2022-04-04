@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 //Data > Accounts
@@ -17,14 +17,40 @@ import Account from "./Account";
 const Profile = () => {
   //* STATES
   //input
-  const [inputFirstName, setInputFirstName] = useState("");
-  const [inputLastName, setInputLastName] = useState("");
+  // const [inputFirstName, setInputFirstName] = useState("");
+  // const [inputLastName, setInputLastName] = useState("");
+
+  const inputFirstNameRef = useRef(null)
+  const inputLastNameRef = useRef(null)
   //Btn Edit
   const [onEdit, setOnEdit] = useState(false);
 
   //HOOKS init
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+
+  // const onloadDoc = () => {
+  //   if (localStorage.getItem('token')) {
+  //     let token = localStorage.getItem('token')
+  //     axios
+  //     .post(
+  //       `${process.env.REACT_APP_API_URL}/user/profile`,
+  //       {},
+  //       {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       const { firstName, lastName } = res.data.body;
+  //       dispatch(editName(firstName, lastName));
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  //   }
+  // }
+
+  //document.body.onload = onloadDoc;
 
   //USEEFFECT
   useEffect(() => {
@@ -47,6 +73,7 @@ const Profile = () => {
       });
   }, [dispatch, userData.token]);
 
+  //! revoir 
   /**
    * Submit form user edit
    * @param {Object} e event
@@ -58,17 +85,18 @@ const Profile = () => {
     const token = userData.token;
 
     //put content > OBJ send with put method
+    //! useRef input
     const data = {
-      firstName: inputFirstName,
-      lastName: inputLastName,
+      firstName: inputFirstNameRef.current.value,
+      lastName: inputLastNameRef.current.value,
     };
 
     axios
       .put(`${process.env.REACT_APP_API_URL}/user/profile`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => {
-        dispatch(editName(inputFirstName, inputLastName));
+      .then(() => {
+        dispatch(editName(data.firstName, data.lastName));
         setOnEdit(false);
       })
       .catch((err) => {
@@ -80,8 +108,8 @@ const Profile = () => {
    * f(x) who clean form feild
    */
   const cancelEdit = () => {
-    setInputFirstName("");
-    setInputLastName("");
+    inputFirstNameRef.current.value = '';
+    inputLastNameRef.current.value = '';
   };
 
   /**
@@ -117,8 +145,8 @@ const Profile = () => {
                 id="firstname"
                 placeholder={userData.firstName}
                 name="firstnameInput"
-                value={inputFirstName}
-                onChange={(e) => setInputFirstName(e.target.value)}
+          
+                ref={inputFirstNameRef}
               />
               <label className="sr-only" htmlFor="lastname">
                 Lastname
@@ -128,8 +156,8 @@ const Profile = () => {
                 id="lastname"
                 placeholder={userData.lastName}
                 name="lastnameInput"
-                value={inputLastName}
-                onChange={(e) => setInputLastName(e.target.value)}
+                
+                ref={inputLastNameRef}
               />
             </div>
             <div className="header-form-group">

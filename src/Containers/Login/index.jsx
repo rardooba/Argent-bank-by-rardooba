@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 
 //Axios
@@ -20,6 +20,13 @@ const Login = () => {
 
   //HOOKS init
   const dispatch = useDispatch();
+  let checkboxRef = useRef()
+  
+  // const ckeckClick = () => {
+  //   if (checkboxRef.current.checked) {
+  //     console.log('Hello !');
+  //   }
+  // }
 
   /**
    * Get user credentials > email, password, token
@@ -35,11 +42,18 @@ const Login = () => {
       token: "",
     };
 
+    const saveTokenInLocalStorage = (token) => {
+      localStorage.setItem('token', token)
+    }
+
     axios
       .post(`${process.env.REACT_APP_API_URL}/user/login`, userLOGinfos)
       .then((res) => {
         //console.log(res);
         //dispatch data to user reducer + get token from API
+        if (checkboxRef.current.checked) {
+          saveTokenInLocalStorage(res.data.body.token)
+        }
         dispatch(login(email, password, res.data.body.token));
         setIsAuth(true);
       })
@@ -48,6 +62,8 @@ const Login = () => {
         setIsError(true);
       });
   };
+
+  //! rememberMe stock token localstorage if checked
 
   return (
     <>
@@ -83,7 +99,7 @@ const Login = () => {
                 Incorrect username or password.
               </div>
               <div className="remember">
-                <input type="checkbox" id="remember-me" />
+                <input type="checkbox" id="remember-me" ref={checkboxRef} />
                 <label htmlFor="remember-me">Remember me</label>
               </div>
               <BUTTON type="submit" value="Sign in" />
