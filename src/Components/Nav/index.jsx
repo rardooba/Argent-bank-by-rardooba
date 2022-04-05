@@ -1,38 +1,54 @@
 import React from "react";
 import styled from "styled-components";
+import Logo from "./logo.png";
 
 //Router
 import { Link } from "react-router-dom";
 
 //Redux
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/actions/user.actions";
+import { purge } from "../../redux/redux";
+
+//------------------------------------------------------------//
 
 const Nav = () => {
-  //? Get user data from store > logStatus and firstName
-  const userData = useSelector((state) => state.userReducer);
-
+  //HOOKS init
+  //State from store
+  const userData = useSelector((state) => state.user);
+  //Dispatch
   const dispatch = useDispatch();
 
   return (
     <NAV className="main-nav">
       <Link className="logo" to="/">
-        <LOGO src="./images/logo.png" alt="Argent Bank Logo" />
+        <LOGO src={Logo} alt="Argent Bank Logo" />
         <SRONLY>Argent Bank</SRONLY>
       </Link>
 
-      {!userData.logStatus ? (
+      {!userData.isAuth ? (
         <LOGIN>
-          <Link className="item" to="/login">
+          <Link className="item" to="/user/login">
             <i className="fa fa-user-circle"></i>
             Sign In
           </Link>
         </LOGIN>
       ) : (
         <LOGOUT>
-          <span className="fa fa-user-circle user"></span>
-          <span className="name">{userData.firstName}</span>
-          <Link className="item" to="/" onClick={() => dispatch(logout())}>
+          <Link className="item" to="user/profile">
+            <span className="fa fa-user-circle user"></span>
+            <span className="name">{userData.firstName}</span>
+          </Link>
+          <Link
+            className="item"
+            to="/"
+            onClick={() => {
+              //INITIAL_STATE from Store
+              dispatch(purge());
+              
+              //! localStorage.clear();
+              //! localStorage.removeItem("persist:user")
+            }}
+          >
             <i className="fa fa-sign-out out"></i>
             Sign Out
           </Link>

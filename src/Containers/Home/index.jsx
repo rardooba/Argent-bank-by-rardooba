@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import bgImg from "./bank-tree.jpeg"
 
 //Components
 import Feature from "./Feature";
 
 //Data > Features
 import features from "../../API/features";
+
+//------------------------------------------------------------//
 
 const Home = () => {
   return (
@@ -46,7 +49,7 @@ const Home = () => {
 
 const MAIN = styled.main`
   .banner {
-    background-image: url(./images/bank-tree.jpeg);
+    background-image: url(${bgImg});
     background-position: 0 -50px;
     background-size: cover;
     background-repeat: no-repeat;

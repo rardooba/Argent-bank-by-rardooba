@@ -5,137 +5,72 @@ import styled from "styled-components";
 import accounts from "../../API/accounts";
 
 //Axios
-import axios from "axios";
+//import axios from "axios";
 
 //Redux
-import { editName } from "../../redux/actions/user.actions";
+import { editName, userInfo } from "../../redux/redux";
 import { useDispatch, useSelector } from "react-redux";
 
 //Components
 import Account from "./Account";
 
+//------------------------------------------------------------//
+
 const Profile = () => {
   //* STATES
-  //input
-  // const [inputFirstName, setInputFirstName] = useState("");
-  // const [inputLastName, setInputLastName] = useState("");
-
-  const inputFirstNameRef = useRef(null)
-  const inputLastNameRef = useRef(null)
   //Btn Edit
   const [onEdit, setOnEdit] = useState(false);
 
   //HOOKS init
-  const userData = useSelector((state) => state.userReducer);
+  //State from store
+  const { firstName, lastName } = useSelector((state) => state.user);
+  //Dispatch
   const dispatch = useDispatch();
+  //useRef
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
 
-  // const onloadDoc = () => {
-  //   if (localStorage.getItem('token')) {
-  //     let token = localStorage.getItem('token')
-  //     axios
-  //     .post(
-  //       `${process.env.REACT_APP_API_URL}/user/profile`,
-  //       {},
-  //       {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       const { firstName, lastName } = res.data.body;
-  //       dispatch(editName(firstName, lastName));
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  //   }
-  // }
-
-  //document.body.onload = onloadDoc;
-
-  //USEEFFECT
+  //USEEFFECT => Get user infos
   useEffect(() => {
-    const token = userData.token;
-
-    axios
-      .post(
-        `${process.env.REACT_APP_API_URL}/user/profile`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((res) => {
-        const { firstName, lastName } = res.data.body;
-        dispatch(editName(firstName, lastName));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [dispatch, userData.token]);
-
-  //! revoir 
-  /**
-   * Submit form user edit
-   * @param {Object} e event
-   */
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    //Get token from Store
-    const token = userData.token;
-
-    //put content > OBJ send with put method
-    //! useRef input
-    const data = {
-      firstName: inputFirstNameRef.current.value,
-      lastName: inputLastNameRef.current.value,
-    };
-
-    axios
-      .put(`${process.env.REACT_APP_API_URL}/user/profile`, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(() => {
-        dispatch(editName(data.firstName, data.lastName));
-        setOnEdit(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  /**
-   * f(x) who clean form feild
-   */
-  const cancelEdit = () => {
-    inputFirstNameRef.current.value = '';
-    inputLastNameRef.current.value = '';
-  };
-
-  /**
-   * f(x) who toggle edit name button
-   */
-  const handleEdit = () => {
-    setOnEdit(!onEdit);
-  };
+    dispatch(userInfo())
+  }, [dispatch])
 
   return (
     <MAIN className="bg-dark">
+        {!onEdit ? (
+        
       <header className="header">
-        <h2>
-          Welcome back
-          <span className="header-name">{`${userData.firstName} ${userData.lastName} !`}</span>
-        </h2>
-        <button
-          className="edit-button"
-          type="button"
-          value="Edit"
-          onClick={handleEdit}
-        >
-          Edit Name
-        </button>
-        {onEdit && (
-          <form onSubmit={handleSubmit}>
+            <h2>
+              Welcome back
+              <span className="header-name">{firstName} {lastName} !</span>
+            </h2>
+            <button
+              className="edit-button"
+              type="button"
+              value="Edit"
+              onClick={(e) => {
+                e.preventDefault();
+                setOnEdit(true);
+              }}
+            >
+              Edit Name
+            </button>
+            </header>
+
+        ) : (
+          <header className="header">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              dispatch(
+                editName({
+                  firstName: firstNameRef.current.value,
+                  lastName: lastNameRef.current.value,
+                })
+              );
+              setOnEdit(false);
+            }}
+          >
             <div className="header-form-group">
               <label className="sr-only" htmlFor="firstname">
                 Firstname
@@ -143,10 +78,9 @@ const Profile = () => {
               <input
                 type="text"
                 id="firstname"
-                placeholder={userData.firstName}
                 name="firstnameInput"
-          
-                ref={inputFirstNameRef}
+                defaultValue={firstName}
+                ref={firstNameRef}
               />
               <label className="sr-only" htmlFor="lastname">
                 Lastname
@@ -154,10 +88,9 @@ const Profile = () => {
               <input
                 type="text"
                 id="lastname"
-                placeholder={userData.lastName}
                 name="lastnameInput"
-                
-                ref={inputLastNameRef}
+                defaultValue={lastName}
+                ref={lastNameRef}
               />
             </div>
             <div className="header-form-group">
@@ -168,14 +101,18 @@ const Profile = () => {
                 className="edit-button"
                 type="button"
                 value="Cancel"
-                onClick={cancelEdit}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOnEdit(false);
+                }}
               >
                 Cancel
               </button>
             </div>
           </form>
-        )}
       </header>
+        )}
+
       <h2 className="sr-only">Accounts</h2>
       {accounts.map((elt) => (
         <Account
@@ -201,7 +138,7 @@ const MAIN = styled.main`
   }
   .header {
     color: #fff;
-    margin-bottom: 2rem;
+    margin: 2rem 0;
 
     &-form-group {
       display: flex;

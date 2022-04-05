@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
+//PropTypes
 import propTypes from "prop-types";
+
+//------------------------------------------------------------//
 
 /**
  * Feature component

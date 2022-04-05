@@ -1,113 +1,98 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-//Axios
-import axios from "axios";
-
 //Redux
-import { login } from "../../redux/actions/user.actions";
-import { useDispatch } from "react-redux";
+import { login } from "../../redux/redux";
+import { useDispatch, useSelector } from "react-redux";
 
-//Router
-import { Navigate } from "react-router-dom";
+//------------------------------------------------------------//
 
 const Login = () => {
-  //STATES
+  //* STATES
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isAuth, setIsAuth] = useState(false);
-  const [isError, setIsError] = useState(false);
+  //const [isAuth, setIsAuth] = useState(false);
+  //const [isError, setIsError] = useState(false);
 
   //HOOKS init
   const dispatch = useDispatch();
-  let checkboxRef = useRef()
-  
-  // const ckeckClick = () => {
-  //   if (checkboxRef.current.checked) {
-  //     console.log('Hello !');
-  //   }
-  // }
+  const checkboxRef = useRef(null);
+
+  //const isAuth= useSelector((state) => state.user.isConnected);
+  const isError = useSelector((state) => state.user?.status?.status === 400);
+  const errorMsg = useSelector((state) => state.user?.status?.message);
 
   /**
-   * Get user credentials > email, password, token
-   * @param {Object} e event
+   * f(x) Who storage user credentials in localStorage
    */
-  const handleLogin = (e) => {
-    e.preventDefault();
-
-    //post content > OBJ send with post method
-    const userLOGinfos = {
-      email: email,
-      password: password,
-      token: "",
-    };
-
-    const saveTokenInLocalStorage = (token) => {
-      localStorage.setItem('token', token)
+  const rememberMe = () => {
+    if (checkboxRef.current.checked) {
+      localStorage.setItem("email", JSON.stringify(`${email}`));
+      localStorage.setItem("password", JSON.stringify(`${password}`));
     }
-
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/user/login`, userLOGinfos)
-      .then((res) => {
-        //console.log(res);
-        //dispatch data to user reducer + get token from API
-        if (checkboxRef.current.checked) {
-          saveTokenInLocalStorage(res.data.body.token)
-        }
-        dispatch(login(email, password, res.data.body.token));
-        setIsAuth(true);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsError(true);
-      });
   };
 
-  //! rememberMe stock token localstorage if checked
+  //USEEFFECT => Timer to clear user credentials from localStorage
+  useEffect(() => {
+    setEmail(JSON.parse(localStorage.getItem("email")));
+    setPassword(JSON.parse(localStorage.getItem("password")));
+
+    const timeOutId = setTimeout(() => {
+
+      //! localStorage.clear()
+
+      localStorage.removeItem("email");
+      localStorage.removeItem("password");
+    }, 10000);
+
+    return () => {
+      clearTimeout(timeOutId);
+    };
+  }, []);
 
   return (
-    <>
-      {isAuth ? (
-        <Navigate to="/profile" />
-      ) : (
-        <MAIN className="bg-dark">
-          <SIGNin>
-            <span className="fa fa-user-circle icon"></span>
-            <h1>Sign In</h1>
-            <form onSubmit={handleLogin} id="sign-up-form">
-              <div className="wrapper">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="text"
-                  id="email"
-                  name="emailInput"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                />
-              </div>
-              <div className="wrapper">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  name="passwordInput"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                />
-              </div>
-              <div className={isError ? "msg error" : "msg"}>
-                Incorrect username or password.
-              </div>
-              <div className="remember">
-                <input type="checkbox" id="remember-me" ref={checkboxRef} />
-                <label htmlFor="remember-me">Remember me</label>
-              </div>
-              <BUTTON type="submit" value="Sign in" />
-            </form>
-          </SIGNin>
-        </MAIN>
-      )}
-    </>
+    <MAIN className="bg-dark">
+      <SIGNin>
+        <span className="fa fa-user-circle icon"></span>
+        <h1>Sign In</h1>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(login({ email, password }));
+          }}
+          id="sign-up-form"
+        >
+          <div className="wrapper">
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              name="emailInput"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email || ""}
+            />
+          </div>
+          <div className="wrapper">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="passwordInput"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password || ""}
+            />
+          </div>
+          {isError && (
+            <div className={isError ? "msg error" : "msg"}>{errorMsg}</div>
+          )}
+          <div className="remember">
+            <input type="checkbox" id="remember-me" ref={checkboxRef} />
+            <label htmlFor="remember-me">Remember me</label>
+          </div>
+          <BUTTON type="submit" value="Sign in" onClick={rememberMe} />
+        </form>
+      </SIGNin>
+    </MAIN>
   );
 };
 
