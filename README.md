@@ -35,6 +35,8 @@ You will need some dependencies for running this project :
 - [Redux](https://redux.js.org/) (4.1.2)
 - [React Redux](https://react-redux.js.org/) (7.2.6)
 - [Redux Thunk](https://github.com/reduxjs/redux-thunk) (2.4.1)
+- [Redux Persist](https://github.com/rt2zz/redux-persist) (6.0.0)
+- [Redux ToolKit](https://redux-toolkit.js.org/) (1.8.1)
 
 - Recommended text editor: [Visual Studio Code](https://code.visualstudio.com/)
 
