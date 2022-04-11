@@ -11,8 +11,6 @@ const Login = () => {
   //* STATES
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //const [isAuth, setIsAuth] = useState(false);
-  //const [isError, setIsError] = useState(false);
 
   //HOOKS init
   const dispatch = useDispatch();
@@ -38,9 +36,6 @@ const Login = () => {
     setPassword(JSON.parse(localStorage.getItem("password")));
 
     const timeOutId = setTimeout(() => {
-
-      //! localStorage.clear()
-
       localStorage.removeItem("email");
       localStorage.removeItem("password");
     }, 10000);
@@ -58,7 +53,7 @@ const Login = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            dispatch(login({ email, password }));
+            dispatch(login({ email, password })).then(res => console.log(res));
           }}
           id="sign-up-form"
         >

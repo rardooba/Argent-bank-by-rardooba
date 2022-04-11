@@ -44,9 +44,6 @@ const Nav = () => {
             onClick={() => {
               //INITIAL_STATE from Store
               dispatch(purge());
-              
-              //! localStorage.clear();
-              //! localStorage.removeItem("persist:user")
             }}
           >
             <i className="fa fa-sign-out out"></i>
