@@ -18,7 +18,7 @@ import {
 import storage from "redux-persist/lib/storage";
 
 //? logger is a redux debbuger > show result in console browser
-import logger from "redux-logger";
+//import logger from "redux-logger";
 
 //Axios
 import axios from "axios";
@@ -160,5 +160,5 @@ export const store = configureStore({
       serializableCheck: {
         ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(logger),
+    }),
 });

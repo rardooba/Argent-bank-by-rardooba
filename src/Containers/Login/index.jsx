@@ -53,7 +53,7 @@ const Login = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            dispatch(login({ email, password })).then(res => console.log(res));
+            dispatch(login({ email, password }));
           }}
           id="sign-up-form"
         >
