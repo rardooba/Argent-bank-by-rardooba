@@ -69,3 +69,5 @@ npm run preview or yarn preview
 This project is part of the OpenClassrooms [Application developer - JavaScript React](https://openclassrooms.com/fr/paths/516-developpeur-dapplication-javascript-react) course. The code is freely reusable, but the images / logo / mock-up do not belong to me.
 
 If you are also an OpenClassrooms student, you can freely draw inspiration from my work, but I obviously do not recommend copying parts of it.
+
+P13 walid ! 24/04/22 10:00 > 11:00 Merci: Frédéric Lépy"
